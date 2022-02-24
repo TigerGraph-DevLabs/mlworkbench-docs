@@ -1,0 +1,24 @@
+name: tigergraph-torch-cpu
+channels:
+  - pyg
+  - pytorch
+  - dglteam
+  - conda-forge
+dependencies:
+  - python=3.9
+  - conda
+  - pip
+  - matplotlib-base
+  - numpy
+  - scipy
+  - pandas
+  - pytorch
+  - cpuonly
+  - pyg
+  - dgl
+  - tensorboard
+  - jupyterlab-git
+  - pip:
+    - pyTigerGraph
+    - tgml
+    
