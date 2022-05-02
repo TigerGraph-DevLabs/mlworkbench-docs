@@ -8,16 +8,18 @@ dependencies:
   - python=3.9
   - conda
   - pip
-  - matplotlib-base
+  - matplotlib-base=3.5.1
   - cudatoolkit=10.2
-  - numpy
-  - scipy
-  - pandas
-  - pytorch
-  - pyg=2.0.2
+  - numpy=1.21.6
+  - scipy=1.8.0
+  - pandas=1.4.2
+  - pytorch=1.11.0
+  - pyg=2.0.4
   - dgl
-  - tensorboard
-  - jupyterlab-git
+  - tensorboard=2.8.0
+  - jupyterlab-git=0.37.1
   - pip:
-    - pyTigerGraph
-    - tgml
+    - pyTigerGraph[gds]
+    - tigergraph-mlworkbench
+    - class-resolver==0.3.9
+    - kafka-python==2.0.2
