@@ -1,9 +1,12 @@
 set exit_on_error = "false"
-use graph Ethereum
-CREATE LOADING JOB Load_Ethereum FOR GRAPH Ethereum {
-      LOAD "/home/tigergraph/tigergraph/data/gui/loading_data/account.csv" TO VERTEX Account VALUES($0, $1, _, _, _, _, _, _, _, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
-      LOAD "/home/tigergraph/tigergraph/data/gui/loading_data/transaction.csv" TO EDGE Transaction VALUES($0, $1, $2, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+USE GRAPH Ethereum
+CREATE LOADING JOB Load_Ethereum_Accounts FOR GRAPH Ethereum {
+      DEFINE FILENAME file1;
+      LOAD file1 TO VERTEX Account VALUES($0, $1, _, _, _, _, _, _, _, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
 }
-RUN LOADING JOB Load_Ethereum
-DROP JOB Load_Ethereum
+
+CREATE LOADING JOB Load_Ethereum_Transactions FOR GRAPH Ethereum {
+      DEFINE FILENAME file1;
+      LOAD file1 TO VERTEX Transaction VALUES($0, $1, $2, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
 set exit_on_error = "true"
