@@ -36,15 +36,16 @@ class VertexClassifier(Model):
         self.infer_loader = self.conn.gds.neighborLoader(**loader_config)
 
         # Setup Model
-        self.model = self.load_model()
         self.model_name = model_name
+        self.model = self.load_model(model_name)
+        
 
     def load(self):
         pass
     
-    def load_model(self):
+    def load_model(self, name):
         import gat_cora.model as model
-        mdl = getattr(model, self.model_name)(**self.model_config)
+        mdl = getattr(model, name)(**self.model_config)
         logger.info("Instantiated Model")
         with open(os.path.join(self.source_dir, "model.pth"), 'rb') as f:
             mdl.load_state_dict(torch.load(f))
@@ -61,14 +62,13 @@ class VertexClassifier(Model):
         with torch.no_grad():
             output = self.model(data)
         returnJSON = {}
-        for i in range(len(input_nodes["vertices"])):
-            returnJSON[input_nodes["vertices"][i]["primary_id"]] = list(output[i].tolist())
+        for i in range(len(input_nodes)):
+            returnJSON[input_nodes[i]["primary_id"]] = list(output[i].tolist())
         return returnJSON
 
 if __name__ == "__main__":
     model_name = os.environ.get('K_SERVICE', "tg-gat-gcp-demo-predictor-default")
     model_name = '-'.join(model_name.split('-')[:-2]) # removing suffix "-predictor-default"
-    print(model_name)
     logging.info(f"Starting model '{model_name}'")
     model = VertexClassifier(model_name, "./gat_cora")
     kserve.ModelServer(http_port=8080).start([model])
