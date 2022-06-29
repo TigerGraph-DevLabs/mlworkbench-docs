@@ -1,0 +1,9 @@
+USE GLOBAL
+
+# Define schema for nodes and edges  
+CREATE VERTEX Paper (PRIMARY_ID id Int, x List<Int>, y Int, train_mask Bool, val_mask Bool, test_mask Bool) WITH primary_id_as_attribute="true"
+
+CREATE DIRECTED EDGE Cite (from Paper, to Paper, time Int, is_train Bool, is_val Bool)
+
+# Define graph
+CREATE GRAPH Cora (Paper, Cite)
