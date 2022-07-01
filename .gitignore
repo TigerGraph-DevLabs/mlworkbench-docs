@@ -133,5 +133,3 @@ dmypy.json
 .DS_Store
 sagemaker
 gnn_dgl
-
-tutorials/basics/data/*/*.csv
