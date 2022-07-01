@@ -1,0 +1,13 @@
+CREATE SCHEMA_CHANGE JOB imdb_job FOR GRAPH imdb {
+    ADD VERTEX movie(PRIMARY_ID id INT, x LIST<INT>, y INT, train_mask BOOL, val_mask BOOL, test_mask BOOL) WITH STATS="OUTDEGREE_BY_EDGETYPE", PRIMARY_ID_AS_ATTRIBUTE="true";
+    ADD VERTEX actor(PRIMARY_ID id INT, x LIST<INT>) WITH STATS="OUTDEGREE_BY_EDGETYPE", PRIMARY_ID_AS_ATTRIBUTE="true";
+    ADD VERTEX director(PRIMARY_ID id INT, x LIST<INT>) WITH STATS="OUTDEGREE_BY_EDGETYPE", PRIMARY_ID_AS_ATTRIBUTE="true";
+
+    ADD DIRECTED EDGE actor_movie(FROM actor, TO movie);
+    ADD DIRECTED EDGE director_movie(FROM director, TO movie);
+    ADD DIRECTED EDGE movie_actor(FROM movie, TO actor);
+    ADD DIRECTED EDGE movie_director(FROM movie, TO director);
+}
+
+USE GRAPH imdb
+RUN SCHEMA_CHANGE JOB imdb_job
