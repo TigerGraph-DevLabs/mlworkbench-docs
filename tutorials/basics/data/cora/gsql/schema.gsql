@@ -1,9 +1,8 @@
-USE GLOBAL
+CREATE SCHEMA_CHANGE JOB Cora_job {
+    ADD VERTEX Paper (PRIMARY_ID id Int, x List<Int>, y Int, train_mask Bool, val_mask Bool, test_mask Bool) WITH primary_id_as_attribute="true";
+    ADD DIRECTED EDGE Cite (from Paper, to Paper, time Int, is_train Bool, is_val Bool);
+}
 
-# Define schema for nodes and edges  
-CREATE VERTEX Paper (PRIMARY_ID id Int, x List<Int>, y Int, train_mask Bool, val_mask Bool, test_mask Bool) WITH primary_id_as_attribute="true"
+USE GRAPH Cora
 
-CREATE DIRECTED EDGE Cite (from Paper, to Paper, time Int, is_train Bool, is_val Bool)
-
-# Define graph
-CREATE GRAPH Cora (Paper, Cite)
+RUN SCHEMA_CHANGE JOB Cora_job
