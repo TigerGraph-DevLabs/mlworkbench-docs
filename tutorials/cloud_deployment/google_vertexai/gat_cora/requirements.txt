@@ -1,0 +1,18 @@
+
+# kubeflow packages
+kfp==1.6.3
+kfp-server-api==1.6.0
+kserve==0.8
+
+# common packages
+#bokeh==2.3.2
+#cloudpickle==1.6.0
+#dill==0.3.4
+#pandas==1.2.4
+
+# pytorch packages
+#fastai==2.4
+class-resolver==0.3.9
+
+# TigerGraph
+pyTigerGraph[gds]==0.9
