@@ -1,3 +1,5 @@
+USE GRAPH imdb
+
 CREATE LOADING JOB load_imdb_data FOR GRAPH imdb {
     DEFINE FILENAME director_csv;
     DEFINE FILENAME actor_movie_csv;
