@@ -1,4 +1,3 @@
-
 import torch
 import kserve
 from google.cloud import storage
@@ -27,8 +26,9 @@ class VertexClassifier(Model):
             self.model_config = data["model_config"]
             connection_config = data["connection_config"]
             loader_config = data["infer_loader_config"]
-            model_name = data["model_name"]
+            self.model_name = data["model_name"]
 
+        sys.path.append(source_directory)
         # Setup Connection to TigerGraph Database
         self.conn = tg.TigerGraphConnection(**connection_config)
 
@@ -37,13 +37,12 @@ class VertexClassifier(Model):
 
         # Setup Model
         self.model = self.load_model()
-        self.model_name = model_name
 
     def load(self):
         pass
     
     def load_model(self):
-        import gat_cora.model as model
+        import model
         mdl = getattr(model, self.model_name)(**self.model_config)
         logger.info("Instantiated Model")
         with open(os.path.join(self.source_dir, "model.pth"), 'rb') as f:
@@ -61,8 +60,8 @@ class VertexClassifier(Model):
         with torch.no_grad():
             output = self.model(data)
         returnJSON = {}
-        for i in range(len(input_nodes["vertices"])):
-            returnJSON[input_nodes["vertices"][i]["primary_id"]] = list(output[i].tolist())
+        for i in range(len(input_nodes)):
+            returnJSON[input_nodes[i]["primary_id"]] = list(output[i].tolist())
         return returnJSON
 
 if __name__ == "__main__":
