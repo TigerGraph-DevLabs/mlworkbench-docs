@@ -17,7 +17,7 @@ WORKDIR /opt
 # Set up the Conda environment
 ENV CONDA_AUTO_UPDATE_CONDA=false \
     PATH=/opt/miniconda/bin:$PATH
-COPY gat_cora/environment.yml /opt/environment.yml
+COPY ./gat_cora/environment.yml /opt/environment.yml
 RUN curl -sLo /opt/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py39_4.11.0-Linux-x86_64.sh \
  && chmod +x /opt/miniconda.sh \
  && /opt/miniconda.sh -b -p /opt/miniconda \
@@ -41,6 +41,5 @@ RUN python3 -m pip install -r /tmp/requirements.txt --quiet --no-cache-dir \
 ENV TARGET_DIR /opt/kserve-demo
 WORKDIR ${TARGET_DIR}
 COPY ./gat_cora/ ${TARGET_DIR}/gat_cora/
-COPY main.py ${TARGET_DIR}/main.py
 
-ENTRYPOINT ["python3", "-m", "main"]
+ENTRYPOINT ["python3", "./gat_cora/main.py"]
