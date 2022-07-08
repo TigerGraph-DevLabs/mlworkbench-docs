@@ -11,3 +11,5 @@ The tutorial directory is broken down to three subdirectories: `basics`, `gnn_py
 
 ### Demos
 There are currently two demos available: `ethereum_fraud` and `recommendation`. `etheruem_fraud` walks you through training a Graph Neural Network to detect fraudulent Ethereum transactions. `recommendation` walks you through training a Graph Neural Network to recommend music to users in the `LastFM` dataset.
+
+## Table of Contents
