@@ -133,3 +133,5 @@ dmypy.json
 .DS_Store
 
 *.tar.gz
+sagemaker
+gnn_dgl

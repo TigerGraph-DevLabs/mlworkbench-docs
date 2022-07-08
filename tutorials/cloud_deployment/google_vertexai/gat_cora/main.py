@@ -44,6 +44,7 @@ class VertexClassifier(Model):
     def load_model(self):
         import model
         mdl = getattr(model, self.mdl_nm)(**self.model_config)
+
         logger.info("Instantiated Model")
         with open(os.path.join(self.source_dir, "model.pth"), 'rb') as f:
             mdl.load_state_dict(torch.load(f))
@@ -63,6 +64,7 @@ class VertexClassifier(Model):
         for i in range(len(input_nodes)):
             returnJSON.append({input_nodes[i]["primary_id"]: list(output[i].tolist())})
         return json.dumps({"predictions": returnJSON})
+
 
 if __name__ == "__main__":
     model_name = os.environ.get('K_SERVICE', "tg-gat-gcp-demo-predictor-default")
