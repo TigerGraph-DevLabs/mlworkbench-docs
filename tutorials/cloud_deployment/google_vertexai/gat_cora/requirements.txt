@@ -15,4 +15,5 @@ kserve==0.8
 class-resolver==0.3.9
 
 # TigerGraph
-pyTigerGraph[gds]==0.9
+pyTigerGraph[gds]
+

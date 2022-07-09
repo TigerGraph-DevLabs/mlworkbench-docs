@@ -1,0 +1,10 @@
+USE GRAPH Ethereum
+CREATE LOADING JOB Load_Ethereum_Accounts FOR GRAPH Ethereum {
+      DEFINE FILENAME file1;
+      LOAD file1 TO VERTEX Account VALUES($0, $1, _, _, _, _, _, _, _, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
+
+CREATE LOADING JOB Load_Ethereum_Transactions FOR GRAPH Ethereum {
+      DEFINE FILENAME file1;
+      LOAD file1 TO EDGE Transaction VALUES($0, $1, $2, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
