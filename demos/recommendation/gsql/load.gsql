@@ -1,0 +1,15 @@
+USE GRAPH LastFM
+CREATE LOADING JOB Load_LastFM_User FOR GRAPH LastFM {
+      DEFINE FILENAME file1;
+      LOAD file1 TO VERTEX User VALUES($0, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
+
+CREATE LOADING JOB Load_LastFM_Item FOR GRAPH LastFM {
+      DEFINE FILENAME file1;
+      LOAD file1 TO VERTEX Item VALUES($1, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}
+
+CREATE LOADING JOB Load_LastFM_Interact FOR GRAPH LastFM {
+      DEFINE FILENAME file1;
+      LOAD file1 TO EDGE Interact VALUES($0, $1, $2, $3) USING SEPARATOR=",", HEADER="true", EOL="\n";
+}

@@ -1,0 +1,22 @@
+USE GRAPH hetero
+
+CREATE LOADING JOB load_hetero_data FOR GRAPH hetero {
+      DEFINE FILENAME v2v0_csv;
+      DEFINE FILENAME v2v1_csv;
+      DEFINE FILENAME v2v2_csv;
+      DEFINE FILENAME v1_csv;
+      DEFINE FILENAME v0v0_csv;
+      DEFINE FILENAME v2_csv;
+      DEFINE FILENAME v1v1_csv;
+      DEFINE FILENAME v1v2_csv;
+      DEFINE FILENAME v0_csv;
+      LOAD v0_csv TO VERTEX v0 VALUES($1, SPLIT($0, " "), $2, _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v1_csv TO VERTEX v1 VALUES($1, SPLIT($0, " "), _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v2_csv TO VERTEX v2 VALUES($1, SPLIT($0, " "), _, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v0v0_csv TO EDGE v0v0 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v1v1_csv TO EDGE v1v1 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v1v2_csv TO EDGE v1v2 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v2v0_csv TO EDGE v2v0 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v2v1_csv TO EDGE v2v1 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+      LOAD v2v2_csv TO EDGE v2v2 VALUES($0, $1, _, _) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    }

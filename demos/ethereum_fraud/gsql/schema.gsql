@@ -1,0 +1,8 @@
+USE GRAPH Ethereum
+
+CREATE SCHEMA_CHANGE JOB ethereum_schema FOR GRAPH Ethereum {
+	ADD VERTEX Account(PRIMARY_ID account_id STRING, is_fraud BOOL, in_degree INT, out_degree INT, send_min DOUBLE, send_amount DOUBLE, recv_min DOUBLE, recv_amount DOUBLE, pagerank DOUBLE, is_training BOOL, is_testing BOOL, is_validation BOOL) WITH STATS="OUTDEGREE_BY_EDGETYPE", PRIMARY_ID_AS_ATTRIBUTE="true";
+	ADD DIRECTED EDGE Transaction(FROM Account, TO Account, amount FLOAT, timestamp STRING) WITH REVERSE_EDGE="reverse_Transaction";
+}
+
+RUN SCHEMA_CHANGE JOB ethereum_schema
