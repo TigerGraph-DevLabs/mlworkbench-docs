@@ -10,7 +10,7 @@ CREATE LOADING JOB load_imdb_data FOR GRAPH imdb {
     DEFINE FILENAME actor_csv;
     LOAD movie_csv TO VERTEX movie VALUES($1, SPLIT($0, " "), $2, $3, $4, $5) USING SEPARATOR=",", HEADER="true", EOL="\n";
     LOAD actor_csv TO VERTEX actor VALUES($1, SPLIT($0, " ")) USING SEPARATOR=",", HEADER="true", EOL="\n";
-    LOAD director_csv TO VERTEX director VALUES($1, SPLIT($1, " ")) USING SEPARATOR=",", HEADER="true", EOL="\n";
+    LOAD director_csv TO VERTEX director VALUES($1, SPLIT($0, " ")) USING SEPARATOR=",", HEADER="true", EOL="\n";
     LOAD actor_movie_csv TO EDGE actor_movie VALUES($0, $1) USING SEPARATOR=",", HEADER="true", EOL="\n";
     LOAD director_movie_csv TO EDGE director_movie VALUES($0, $1) USING SEPARATOR=",", HEADER="true", EOL="\n";
     LOAD movie_actor_csv TO EDGE movie_actor VALUES($0, $1) USING SEPARATOR=",", HEADER="true", EOL="\n";
