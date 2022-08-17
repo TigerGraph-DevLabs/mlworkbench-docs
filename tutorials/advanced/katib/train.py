@@ -42,7 +42,7 @@ def main():
         type=int,
         default=10,
         metavar="N",
-        help="number of epochs to train (default: 10)",
+        help="number of training epochs (default: 10)",
     )
     parser.add_argument(
         "--lr",
@@ -88,11 +88,14 @@ def main():
     )
 
     conn = TigerGraphConnection(
-        host="https://cora.i.tgcloud.io",
+        host="http://127.0.0.1", # Change the address to your database server's
         graphname="Cora",
-        gsqlSecret="me6phlc9mr8fv2lerqpkjil99p68ee6e",
+        username="tigergraph",
+        password="tigergraph",
+        gsqlSecret="", # secret instead of user/pass is required for TG cloud DBs created after 7/5/2022
     )
-    conn.getToken("me6phlc9mr8fv2lerqpkjil99p68ee6e")
+    # Uncomment below if token authentication is enabled on the DB
+    # conn.getToken("YOUR SECRET") # Change to your DB secret
 
     graph_loader = conn.gds.graphLoader(
         v_in_feats=["x"],
