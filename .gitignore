@@ -134,4 +134,3 @@ dmypy.json
 
 *.tar.gz
 sagemaker
-gnn_dgl
