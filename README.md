@@ -1,5 +1,8 @@
 # Tutorials for TigerGraph ML Workbench
 
+**Update**
+This repo is deprecated. Please refer to https://github.com/tigergraph/graph-ml-notebooks for more recent docs.
+
 **Note**: The `main` branch is under active development and might contain breaking changes since the latest release. For docs most relavant to a specific version of the ML Workbench, please check out the corresponding branch, e.g., the `1.0` branch for ML Workbench v1.0.x.
 
 ## Repository Organization and Content
